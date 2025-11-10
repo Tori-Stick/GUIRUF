@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: GUIRUF
+Description: Minimal X11 GUI Wrapper
+Version: 1.0
+Libs: -L${libdir} -lGUIRUF -lX11
+Cflags: -I${includedir}
