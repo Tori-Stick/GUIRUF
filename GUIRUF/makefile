@@ -7,7 +7,7 @@ SRCS = src/guiruf.cxx
 HDRDIR = include/GUIRUF/
 LIBNAME = GUIRUF
 
-VERSION = 1.0.0
+VERSION = 1.0.1
 SOVERSION = 1
 
 LIB_SO = lib$(LIBNAME).so.$(VERSION)
@@ -17,7 +17,7 @@ PCFILE = ${PKGDIR}/${LIBNAME}.pc
 
 CXX = g++
 CFLAGS = -Wall -fPIC -Iinclude
-LDFLAGS = -shared -lX11
+LDFLAGS = -shared -lX11 -lXext 
 
 .PHONY: all clean install uninstall
 
@@ -57,5 +57,5 @@ $(PCFILE):
 	echo "Name: GUIRUF" >> $(PCFILE)
 	echo "Description: Minimal X11 GUI Wrapper" >> $(PCFILE)
 	echo "Version: $(VERSION)" >> $(PCFILE)
-	echo "Libs: -L$${libdir} -lGUIRUF" >> $(PCFILE)
+	echo "Libs: -L$${libdir} -lGUIRUF -lX11" >> $(PCFILE)
 	echo "Cflags: -I$${includedir}" >> $(PCFILE)
