@@ -1,7 +1,7 @@
 /**
  * @file guiruf.hpp
  * @author ToriStick (printf314@gmail.com)
- * @brief GUIRUF (GUI of Removed Unneeded Functions)
+ * @brief GUIRUF (GUI library of Removed Unneeded Functions)
  * @version 1.0
  * @date 2025-11-10
  * 
