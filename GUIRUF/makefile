@@ -7,7 +7,7 @@ SRCS = src/guiruf.cxx
 HDRDIR = include/GUIRUF/
 LIBNAME = GUIRUF
 
-VERSION = 1.0.1
+VERSION = 1.0.2
 SOVERSION = 1
 
 LIB_SO = lib$(LIBNAME).so.$(VERSION)
@@ -17,14 +17,15 @@ PCFILE = ${PKGDIR}/${LIBNAME}.pc
 
 CXX = g++
 CFLAGS = -Wall -fPIC -Iinclude
-LDFLAGS = -shared -lX11 -lXext 
+LDFLAGS = -lX11 -lXext 
 
 .PHONY: all clean install uninstall
 
 all: $(LIB_SO)
 
 $(LIB_SO): $(SRCS)
-	$(CXX) $(CFLAGS) $(LDFLAGS) -I ${HDRDIR} -Wl,-soname,$(LIB_SONAME) -o $@ $^
+	$(CXX) $(CFLAGS) -I $(HDRDIR) -c $< -o $(basename $<).o
+	$(CXX) -shared -o $(LIB_SO) $(basename $<).o $(CFLAGS) $(LDFLAGS) -Wl,-soname,$(LIB_SONAME)
 
 install: all ${PCFILE}
 	mkdir -p $(LIBDIR)
@@ -43,6 +44,7 @@ uninstall:
 
 clean:
 	rm -f $(LIB_SO) $(LIB_SONAME) $(LIB_SO_SHORT) *.o
+	find ./ -name "*.o" -type f -delete
 
 PKGDIR = $(LIBDIR)/pkgconfig
 PCFILE = $(PKGDIR)/GUIRUF.pc

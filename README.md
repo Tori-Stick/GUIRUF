@@ -10,7 +10,7 @@ GUIRUF (GUI library of Removed Unneeded Functions)
 
 1. GitHubのURL、または以下のコマンドからライブラリのtar.gzファイルをダウンロードする。
 ```
-wget https://github.com/Tori-Stick/GUIRUF/raw/refs/heads/main/GUIRUF-1.0.1.tar.gz
+wget https://github.com/Tori-Stick/GUIRUF/raw/refs/heads/main/GUIRUF-1.0.2.tar.gz
 ```
 
 2. tar.gzファイルを解凍する
@@ -29,7 +29,7 @@ sudo make install
 
 コマンドラインで実行したいとき
 ```
-g++ main.cpp -o main -lGUIRUF -lX11 
+g++ main.cpp -o main -lGUIRUF
 ./main
 ```
 
@@ -39,7 +39,7 @@ include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
 add_executable(main main.cpp)
-target_link_libraries(main GUIRUF X11)
+target_link_libraries(main GUIRUF)
 ```
 
 ## 使用方法
@@ -71,10 +71,21 @@ eraseがtrueだと、白で描画します。
 `DrawLine`は、始点を(x1,y1)、終点を(x2,y2)とする幅1pxの線を
 ウィンドウ上に描画します。
 
+描画するときには以下のように、**ループ内で実行してください**。
+```
+while(ture){
+    guiruf.UpdateEvents();
+
+    DrawLine(0,0,500,500);
+    if(guiruf.IsKeyPressed) {
+        break;
+    }
+}
+```
+
 <br>
 
 **ウィンドウ上での操作を取得したいとき**は、以下のコードが使えます。
-ただし、これらのコードは**ループ内で使用することを推奨しています**。
 
 - `UpdateEvents()`
 - `IsMouseClicked()`
@@ -98,6 +109,7 @@ eraseがtrueだと、白で描画します。
 ## 更新履歴
 
 * 2025/11/12 README.md, makafileを更新、NOTICEを追加
+* 2025/12/2 README.md, makafileを更新
 
 ## License
 
